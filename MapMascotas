@@ -1,0 +1,23 @@
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapMascotas {
+    public static void main(String[] args) {
+        Map<LocalDate, Mascota> mapaMascotas = new HashMap<>();
+
+        LocalDate fecha = LocalDate.of(2023, 1, 1);
+        for (int i = 1; i <= 12; i++) {
+            Mascota mascota = Utilidades.mascotaAleatoria();
+            while (mapaMascotas.containsValue(mascota)) {
+                mascota = Utilidades.mascotaAleatoria();
+            }
+            mapaMascotas.put(fecha, mascota);
+            fecha = fecha.plusMonths(1);
+        }
+
+        for (Map.Entry<LocalDate, Mascota> entry : mapaMascotas.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+    }
+}
